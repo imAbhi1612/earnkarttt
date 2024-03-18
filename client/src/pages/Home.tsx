@@ -60,6 +60,7 @@ function Home() {
       try {
         const response = await axios.get(`/forms/${userId}/getallresponse`);
         setTotalResponses(response.data.data.totalResponsesByForm);
+        localStorage.removeItem('userId');
       } catch (error) {
         console.error('Error fetching total responses by form:', error);
       }
