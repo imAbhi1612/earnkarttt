@@ -34,9 +34,6 @@ const isUserApproved = () => {
     const decryptedData = getDecryptedData(userDetailsString);
     // Check if decryptedData is an object
     if (typeof decryptedData === 'object') {
-      if (decryptedData?.id) {
-        localStorage.setItem('userId', decryptedData.id);
-      }
       return decryptedData?.isApproved || false;
     } else {
       return false;
