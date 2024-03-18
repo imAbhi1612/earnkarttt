@@ -15,7 +15,6 @@ export default function useLogout() {
         withCredentials: true,
       });
       setAuth(initialAuthState);
-      localStorage.removeItem('userId');
       removeCookie('userDetails');
       toast.success('Logged out successfully');
       navigate('/login');
