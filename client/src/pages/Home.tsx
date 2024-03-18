@@ -67,7 +67,6 @@ function Home() {
 
     fetchTotalResponsesByForm();
   }, [userId]);
-  localStorage.removeItem('userId');
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
