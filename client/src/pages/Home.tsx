@@ -48,7 +48,14 @@ function Home() {
   const [totalResponses, setTotalResponses] = useState<
     FormsResponseType['totalResponsesByForm']
   >([]);
-  const userId = localStorage.getItem('userId');
+  // Initialize userId state with null
+  const [userId, setUserId] = useState<string | null>(null);
+
+  // Reset userId state when component mounts
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    setUserId(userId);
+  }, []);
   // if (!userId) {
   //   console.error('User ID not found in local storage');
   //   return;
