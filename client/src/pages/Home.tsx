@@ -5,6 +5,8 @@ import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import type { FormType, PaginatedResponseType } from '../types';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { getDecryptedData } from '../utils';
 
 import axios from '@/lib/axios';
 interface FormsResponseType extends PaginatedResponseType {
@@ -19,6 +21,8 @@ interface FormsResponseType extends PaginatedResponseType {
 function Home() {
   const [searchParams] = useSearchParams();
   const axiosPrivate = useAxiosPrivate();
+  const [cookies] = useCookies(['userDetails']);
+  const userDetailsString = cookies.userDetails;
 
   const params = {
     page: searchParams.get('page') || 0,
@@ -48,14 +52,19 @@ function Home() {
   const [totalResponses, setTotalResponses] = useState<
     FormsResponseType['totalResponsesByForm']
   >([]);
-  // Initialize userId state with null
-  const [userId, setUserId] = useState<string | null>(null);
+  try {
+    // Decrypt the user details string
+    const decryptedData = getDecryptedData(userDetailsString);
 
-  // Reset userId state when component mounts
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
-    setUserId(userId);
-  }, []);
+    // Check if decryptedData is an object
+    if (typeof decryptedData === 'object' && decryptedData?.id) {
+      localStorage.setItem('userId', decryptedData.id);
+    }
+  } catch (error) {
+    console.error('Error parsing or decrypting user details:', error);
+  }
+
+  const userId = localStorage.getItem('userId');
   // if (!userId) {
   //   console.error('User ID not found in local storage');
   //   return;
