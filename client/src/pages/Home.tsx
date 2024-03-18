@@ -49,10 +49,10 @@ function Home() {
     FormsResponseType['totalResponsesByForm']
   >([]);
   const userId = localStorage.getItem('userId');
-  if (!userId) {
-    console.error('User ID not found in local storage');
-    return;
-  }
+  // if (!userId) {
+  //   console.error('User ID not found in local storage');
+  //   return;
+  // }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -60,7 +60,6 @@ function Home() {
       try {
         const response = await axios.get(`/forms/${userId}/getallresponse`);
         setTotalResponses(response.data.data.totalResponsesByForm);
-        localStorage.removeItem('userId');
       } catch (error) {
         console.error('Error fetching total responses by form:', error);
       }
@@ -68,6 +67,7 @@ function Home() {
 
     fetchTotalResponsesByForm();
   }, [userId]);
+  localStorage.removeItem('userId');
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
