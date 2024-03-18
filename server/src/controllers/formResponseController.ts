@@ -5,6 +5,7 @@ import Form from '../models/formModel';
 import AppError from '../utils/appError';
 import ExcelJS from 'exceljs';
 import User from '../models/userModel';
+import mongoose from 'mongoose';
 
 // Function to strip HTML tags
 const stripHtmlTags = (htmlString: string) => {
