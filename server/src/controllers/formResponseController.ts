@@ -151,49 +151,75 @@ export const exportForm = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
-export const getTotalResponses = catchAsyncError(
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      // Aggregate the responses to group them by form and count the total responses for each form
-      const totalResponsesByForm = await FormResponse.aggregate([
-        {
-          $group: {
-            _id: '$form',
-            totalResponses: { $sum: 1 },
-          },
-        },
-        {
-          $lookup: {
-            from: 'forms', // Assuming the collection name for Form model is 'forms'
-            localField: '_id',
-            foreignField: '_id',
-            as: 'formDetails',
-          },
-        },
-        {
-          $unwind: '$formDetails',
-        },
-        {
-          $project: {
-            _id: 0,
-            formId: '$_id',
-            formName: '$formDetails.name',
-            totalResponses: 1,
-          },
-        },
-        {
-          $sort: { formName: 1, formId: 1 }, // Sort by formName and form ID
-        },
-      ]);
-
-      res.status(200).json({
-        status: 'success',
-        data: {
-          totalResponsesByForm,
-        },
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+export const getTotalResponses =async (req: Request, res: Response, next: NextFunction) => {
+     try {
+       // Extract the user ID from the request parameters or query
+       const user = req.params.id || req.query.id;
+ 
+       // Ensure user is a string before proceeding
+       if (typeof user !== 'string') {
+         return res.status(400).json({
+           status: 'error',
+           message: 'Invalid user ID',
+         });
+       }
+ 
+       // Aggregate the responses to group them by form and count the total responses for each form
+       const totalResponsesByForm = await FormResponse.aggregate([
+         {
+           $lookup: {
+             from: 'forms', // Assuming the collection name for Form model is 'forms'
+             localField: 'form',
+             foreignField: '_id',
+             as: 'formDetails',
+           },
+         },
+         {
+           $unwind: '$formDetails',
+         },
+         {
+           $match: {
+             'formDetails.user': new mongoose.Types.ObjectId(user), // Filter by user ID
+           },
+         },
+         {
+           $group: {
+             _id: '$form',
+             totalResponses: { $sum: 1 },
+           },
+         },
+         {
+           $lookup: {
+             from: 'forms',
+             localField: '_id',
+             foreignField: '_id',
+             as: 'formDetails',
+           },
+         },
+         {
+           $unwind: '$formDetails',
+         },
+         {
+           $project: {
+             _id: 0,
+             formId: '$_id',
+             formName: '$formDetails.name',
+             totalResponses: 1,
+           },
+         },
+         {
+           $sort: { formName: 1, formId: 1 }, // Sort by formName and form ID
+         },
+       ]);
+ 
+       res.status(200).json({
+         status: 'success',
+         data: {
+           totalResponsesByForm,
+         },
+       });
+     } catch (error) {
+       next(error);
+     }
+  };
+ 
