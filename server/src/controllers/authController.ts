@@ -353,6 +353,7 @@ export const getAllApprovedUsers = async (
           email: user.email,
           avatar: user.avatar,
           isApproved: user.isApproved,
+          updatedAt: user.updatedAt,
         })),
       },
     });
