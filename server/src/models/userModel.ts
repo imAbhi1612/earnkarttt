@@ -12,6 +12,7 @@ interface IUser {
   isDeleted: boolean;
   deletedAt: Date | null;
   isApproved: boolean; // New field for approval status
+  updatedAt?: Date;
 }
 
 const userSchema = new Schema<IUser>(
