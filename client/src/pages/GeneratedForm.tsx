@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@tanstack/react-query';
-
+import './GeneratedForm.css';
 import { Button } from '../components/ui/Button';
 import {
   AlertDialog,
@@ -150,17 +150,11 @@ export default function GeneratedForm() {
 
   return (
     <Form {...form}>
-      <form
-        className="flex min-h-[100dvh] flex-col bg-muted"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <header className="fixed left-0 right-0 top-0 z-30 border-b bg-white/80 backdrop-blur-sm">
-          <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between px-6">
-            <h1 className="font-cursive text-3xl font-bold text-primary">
-              Form
-            </h1>
+      <form className="body" onSubmit={form.handleSubmit(onSubmit)}>
+        {/* <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between px-6">
+          <h1 className="font-cursive text-3xl font-bold text-primary">Form</h1>
 
-            {/*             <div className="flex gap-6">
+          {/*             <div className="flex gap-6">
               <ClearFormButton
                 disabled={isPending || mutation.isPending}
                 onClear={() => form.reset()}
@@ -171,8 +165,7 @@ export default function GeneratedForm() {
               >
                 Submit Form
               </Button> */}
-          </div>
-        </header>
+        {/* </div> */}
         {isPending ? (
           <img
             src={LoadingSvg}
@@ -184,13 +177,11 @@ export default function GeneratedForm() {
             <Error fullScreen={false} />
           </div>
         ) : (
-          <main className="mx-auto mt-16 h-full w-full max-w-[720px] p-5">
-            <ul className="space-y-5 ">
-              <li className="items-center rounded-md bg-background px-5 py-3 text-2xl font-medium">
-                {data.name}
-              </li>
+          <main className="form-container">
+            <ul className="">
+              <li className="label bg-background">{data.name}</li>
               {data.elements.map(element => (
-                <li key={element.id}>
+                <li key={element.id} className="form-group">
                   <FormField
                     control={form.control}
                     name={element.id}
@@ -221,6 +212,7 @@ export default function GeneratedForm() {
                 <Button
                   disabled={!data.isActive}
                   isLoading={mutation.isPending}
+                  className="mt-2"
                 >
                   Continue
                 </Button>
