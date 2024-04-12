@@ -10,11 +10,10 @@
 
 .form-container {
     background-color: white;
-    padding: 35px;
+    padding: 10px;
     border: 2px solid rgb(205, 206, 209);
     border-radius: 10px;
-    width: 300px;
-    text-align: center;
+    width: 400px;
     
 }
 .form-group {
@@ -27,8 +26,9 @@
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
+    text-align: center;
 }
-.form-group input {
+.input {
     width: 100%;
     padding: 8px;
     border: 2px solid rgb(188, 187, 187);
