@@ -177,17 +177,17 @@ export default function GeneratedForm() {
             <Error fullScreen={false} />
           </div>
         ) : (
-          <main className="form-container">
-            <ul className="">
-              <li className="label bg-background">{data.name}</li>
+          <main>
+            <ul className="form-container">
+              <li className="label bg-background text-2xl">{data.name}</li>
               {data.elements.map(element => (
-                <li key={element.id} className="form-group">
+                <li key={element.id}>
                   <FormField
                     control={form.control}
                     name={element.id}
                     render={({ field }) => (
                       <FormItem>
-                        <FormControl>
+                        <FormControl className="form-group">
                           <FormElementCard
                             formElement={element}
                             isView
