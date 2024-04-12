@@ -4,6 +4,10 @@ import UserNav from '../components/header/UserNav';
 
 const navItems = [
   {
+    label: 'Dashboard',
+    href: '/',
+  },
+  {
     label: 'Create Form',
     href: '/createForm',
   },
@@ -30,12 +34,7 @@ export default function BaseLayout() {
     <>
       <header className="fixed left-0 right-0 top-0 z-30 border-b bg-white/80 backdrop-blur-sm">
         <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between px-6">
-          <Link to="/">
-            <h1 className="font-cursive text-3xl font-bold text-primary">
-              EarnKart
-            </h1>
-          </Link>
-          <button
+        <button
             className="block focus:outline-none md:hidden"
             onClick={toggleMenu}
           >
@@ -57,6 +56,11 @@ export default function BaseLayout() {
               />
             </svg>
           </button>
+          <Link to="/">
+            <h1 className="font-cursive text-3xl font-bold text-primary">
+              EarnKart
+            </h1>
+          </Link>
           <nav className="hidden md:block">
             <ul className="grid h-9 w-96 grid-cols-3 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground md:flex">
               {navItems.map(({ label, href }, i) => (
