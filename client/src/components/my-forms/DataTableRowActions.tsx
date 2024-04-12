@@ -48,7 +48,7 @@ export default function DataTableRowActions({ formId }: { formId: string }) {
   });
   const handleDownload = () => {
     // Construct the download URL
-    const downloadUrl = `https://earnkart.onrender.com//api/v1/forms/exceldownload/${formId}`;
+    const downloadUrl = `https://earnkart.onrender.com/api/v1/forms/exceldownload/${formId}`;
 
     // Redirect the user to the download URL
     window.location.href = downloadUrl;
