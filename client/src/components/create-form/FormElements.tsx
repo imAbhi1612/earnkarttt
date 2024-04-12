@@ -5,9 +5,7 @@ import {
   ChevronDownCircleIcon,
   ClockIcon,
   HeadingIcon,
-  // ImageIcon,
   ListTodoIcon,
-  // PaperclipIcon,
   PencilLineIcon,
   TextIcon,
   ToggleRightIcon,
@@ -15,7 +13,6 @@ import {
 } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-
 import {
   ListSearchSvg,
   ListSvg,
@@ -24,7 +21,46 @@ import {
 } from '../../assets/icons/Svgs';
 import { ScrollArea } from '../ui/ScrollArea';
 import SearchInput from '../shared/SearchInput';
-import DraggableButton from './DraggableButton';
+import { ClickableButton } from './ClickableButton';
+import { useFormPlaygroundStore } from '../../stores/formPlaygroundStore';
+
+// Define the determineType function
+function determineType(text: string) {
+  switch (text) {
+    case 'Heading':
+      return 'heading';
+    case 'Description':
+      return 'description';
+    case 'Name':
+      return 'name';
+    case 'Number':
+      return 'number';
+    case 'Multi-line':
+      return 'multi-line';
+    case 'Rich Text':
+      return 'rich-text';
+    case 'Checklist':
+      return 'checklist';
+    case 'Multi-choice':
+      return 'multi-choice';
+    case 'Dropdown':
+      return 'dropdown';
+    case 'Combobox':
+      return 'combobox';
+    case 'Checkbox':
+      return 'checkbox';
+    case 'Switch':
+      return 'switch';
+    case 'Date':
+      return 'date';
+    case 'Date Range':
+      return 'date-range';
+    case 'Time':
+      return 'time';
+    default:
+      return 'unknown'; // Fallback for unknown types
+  }
+}
 
 const elementGroups = [
   {
@@ -132,6 +168,8 @@ export default function FormElements({ isUpdate }: Props) {
 
   const [parent] = useAutoAnimate();
 
+  const addFormElement = useFormPlaygroundStore(state => state.addFormElement);
+
   const filteredElementGroups = elementGroups.map(({ elements, title }, i) => {
     const filteredElements = elements.filter(({ text }) =>
       text.toLowerCase().includes(query.toLowerCase()),
@@ -143,7 +181,13 @@ export default function FormElements({ isUpdate }: Props) {
           <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
           <ul className="mt-3 grid grid-cols-2 gap-4" ref={parent}>
             {filteredElements.map(({ text, Icon }, i) => (
-              <DraggableButton text={text} Icon={Icon} key={i} />
+              <li key={i}>
+                <ClickableButton
+                  text={text}
+                  Icon={Icon}
+                  onClick={() => addFormElement(text, determineType(text))}
+                />
+              </li>
             ))}
           </ul>
         </article>
@@ -162,7 +206,7 @@ export default function FormElements({ isUpdate }: Props) {
           <div className="space-y-1">
             <h1 className="text-lg font-semibold">Form Elements</h1>
             <h2 className="text-sm text-muted-foreground">
-              Drag elements to the right
+              Click elements to add to the form
             </h2>
           </div>
           <SearchInput placeholder="Search Elements" />
