@@ -47,27 +47,12 @@ export default function DataTableRowActions({ formId }: { formId: string }) {
     onError: () => toast.error('Error deleting form'),
   });
   const handleDownload = () => {
-    // Perform the GET request for download
-    axiosPrivate
-      .get(`/forms/exceldownload/${formId}`, { responseType: 'blob' }) // Set responseType to 'blob' to handle binary data
-      .then(response => {
-        // Create a Blob object from the binary data
-        const blob = new Blob([response.data], {
-          type: response.headers['content-type'],
-        });
+    // Construct the download URL
+    const downloadUrl = `https://earnkart.onrender.com//api/v1/forms/exceldownload/${formId}`;
 
-        // Create a URL for the Blob and open it in a new tab
-        const url = window.URL.createObjectURL(blob);
-        window.open(url, '_blank');
-
-        // Release the Object URL when no longer needed
-        window.URL.revokeObjectURL(url);
-      })
-      .catch(error => {
-        console.error('Error downloading file', error);
-        toast.error('Error downloading file');
-      });
-  };
+    // Redirect the user to the download URL
+    window.location.href = downloadUrl;
+};
 
   return (
     <DropdownMenu modal={false} open={open} onOpenChange={setOpen}>
