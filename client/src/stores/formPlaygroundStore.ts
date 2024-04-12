@@ -2,14 +2,12 @@ import { createWithEqualityFn } from 'zustand/traditional';
 import { immer } from 'zustand/middleware/immer';
 import { produce } from 'immer';
 import { v4 as uuid } from 'uuid';
-import { arrayMove } from '@dnd-kit/sortable';
 import type { FormElementsType } from '@form-builder/validation/types';
 
 interface FormPlaygroundStoreType {
   formElements: FormElementsType[];
   setFormElements: (formElements: FormElementsType[]) => void;
   addFormElement: (label: string, type: string) => void;
-  moveFormElement: (oldIndex: number, newIndex: number) => void;
   updateLabel: (id: string, label: string) => void;
   toggleRequired: (id: string) => void;
   addOption: (id: string) => void;
@@ -48,16 +46,6 @@ export const useFormPlaygroundStore = createWithEqualityFn(
                 ]
               : undefined,
           });
-        }),
-      ),
-    moveFormElement: (oldIndex, newIndex) =>
-      set(
-        produce((draft: FormPlaygroundStoreType) => {
-          draft.formElements = arrayMove(
-            draft.formElements,
-            oldIndex,
-            newIndex,
-          );
         }),
       ),
     updateLabel: (id, label) =>
