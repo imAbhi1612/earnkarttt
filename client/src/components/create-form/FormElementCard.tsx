@@ -1,4 +1,4 @@
-import { GripVerticalIcon, Trash2Icon } from 'lucide-react';
+import { Trash2Icon } from 'lucide-react';
 import Input from '../ui/Input';
 import { Button } from '../ui/Button';
 import Tooltip from '../ui/Tooltip';
