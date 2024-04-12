@@ -142,7 +142,7 @@ export const exportForm = async (req: Request, res: Response) => {
 
     // Set response headers for Excel download with the correct filename
     const filename = `${form.name.replace(/[^\w\s]/gi, '')}.xlsx`; // Remove special characters from form name
-    console.log(filename);
+    
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
     res.send(excelBuffer);
