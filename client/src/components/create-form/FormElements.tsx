@@ -35,6 +35,8 @@ function determineType(text: string) {
       return 'name';
     case 'Number':
       return 'number';
+    case 'Vendor Name':
+      return 'name';
     case 'Multi-line':
       return 'multi-line';
     case 'Rich Text':
@@ -86,6 +88,10 @@ const elementGroups = [
       {
         text: 'Number',
         Icon: NumberSvg,
+      },
+      {
+        text: 'Vendor Name',
+        Icon: TypeIcon,
       },
       {
         text: 'Multi-line',
