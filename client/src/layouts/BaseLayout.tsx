@@ -58,7 +58,7 @@ export default function BaseLayout() {
           </button>
           <Link to="/">
             <h1 className="font-cursive text-3xl font-bold text-primary">
-              EarnKart
+              LedTracker
             </h1>
           </Link>
           <nav className="hidden md:block">
