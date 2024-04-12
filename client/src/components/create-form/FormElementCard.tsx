@@ -1,10 +1,4 @@
 import { GripVerticalIcon, Trash2Icon } from 'lucide-react';
-import {
-  type AnimateLayoutChanges,
-  useSortable,
-  defaultAnimateLayoutChanges,
-} from '@dnd-kit/sortable';
-
 import Input from '../ui/Input';
 import { Button } from '../ui/Button';
 import Tooltip from '../ui/Tooltip';
@@ -31,12 +25,6 @@ import { RadioGroup, RadioGroupItem } from '../ui/RadioGroup';
 import { Combobox } from '../ui/Combobox';
 import type { ControllerRenderProps, FieldValues } from 'react-hook-form';
 
-const animateLayoutChanges: AnimateLayoutChanges = args => {
-  const { isSorting, wasDragging } = args;
-  if (isSorting || wasDragging) return defaultAnimateLayoutChanges(args);
-  return true;
-};
-
 interface Props {
   formElement: FormElementsType;
   isView?: boolean;
@@ -55,41 +43,12 @@ export default function FormElementCard({
   const toggleRequired = useFormPlaygroundStore(state => state.toggleRequired);
   const updateLabel = useFormPlaygroundStore(state => state.updateLabel);
 
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id, animateLayoutChanges });
-
-  const cardStyle = {
-    transform: transform
-      ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
-      : undefined,
-    transition,
-  };
-
   return (
     <article
       className={`relative flex gap-2 rounded-md bg-white py-3 shadow ${
-        isDragging ? 'z-10' : ''
-      } ${isView ? 'px-5' : 'pl-2 pr-4'}`}
-      ref={setNodeRef}
-      style={cardStyle}
+        isView ? 'px-5' : 'pl-2 pr-4'
+      }`}
     >
-      {isView ? null : (
-        <div
-          className={`flex cursor-move items-center rounded px-2 ${
-            isDragging ? 'bg-muted' : 'hover:bg-muted'
-          }`}
-          {...listeners}
-          {...attributes}
-        >
-          <GripVerticalIcon className="h-7 w-7 text-muted-foreground transition-colors duration-200" />
-        </div>
-      )}
       <div
         className={`flex-grow space-y-2 ${
           ['heading', 'description', 'checkbox', 'switch'].includes(type)
