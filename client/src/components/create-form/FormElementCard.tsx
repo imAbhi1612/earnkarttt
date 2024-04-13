@@ -45,7 +45,7 @@ export default function FormElementCard({
 
   return (
     <article
-      className={`relative flex gap-2 rounded-md bg-white py-3 ${
+      className={`relative flex gap-2 rounded-md bg-white py-1 ${
         isView ? 'px-5' : 'pl-2 pr-4'
       }`}
     >
