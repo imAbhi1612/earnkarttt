@@ -59,7 +59,7 @@ export const getForm = catchAsyncError(
     // Fetch the form owner's details
     const ownerDetails = await User.findById(ownerId);
     if (!ownerDetails || ownerDetails.isApproved) {
-      form.isActive = true; // Set the form as inactive
+      form.isActive = false; // Set the form as inactive
       await form.save(); // Save the changes
     }
 
