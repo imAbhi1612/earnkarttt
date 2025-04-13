@@ -99,25 +99,25 @@ const router = createBrowserRouter([
               {
                 path: '/createForm',
                 element: (
-                  <ConditionalContent>
+                
                     <CreateForm />
-                  </ConditionalContent>
+              
                 ),
               },
               {
                 path: '/my-forms',
                 element: (
-                  <ConditionalContent>
+                  
                     <MyForms />
-                  </ConditionalContent>
+                
                 ),
               },
               {
                 path: '/my-forms/:id/edit',
                 element: (
-                  <ConditionalContent>
+                
                     <UpdateForm />
-                  </ConditionalContent>
+                
                 ),
               },
               {
