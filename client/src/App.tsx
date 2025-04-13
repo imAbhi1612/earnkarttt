@@ -122,7 +122,11 @@ const router = createBrowserRouter([
               },
               {
                 path: '/settings',
-                element: <Settings />,
+                element: (
+                   <ConditionalContent>
+                 
+                     <Settings />
+                   </ConditionalContent>,
               },
               {
                 path: '/home',
