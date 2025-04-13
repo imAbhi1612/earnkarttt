@@ -126,7 +126,8 @@ const router = createBrowserRouter([
                    <ConditionalContent>
                  
                      <Settings />
-                   </ConditionalContent>,
+                   </ConditionalContent>
+                  ),
               },
               {
                 path: '/home',
