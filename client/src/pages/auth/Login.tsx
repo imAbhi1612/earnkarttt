@@ -32,7 +32,7 @@ export default function Login() {
   const [searchParams] = useSearchParams();
   const setCookie = useCookies(['userDetails'])[1];
   const { setAuth, persist, setPersist } = useAuth();
-  useTitle('Sign In | Form Builder');
+  useTitle('Sign In | Lead Tracker');
 
   useEffect(() => {
     localStorage.setItem('persist', JSON.stringify(persist));
