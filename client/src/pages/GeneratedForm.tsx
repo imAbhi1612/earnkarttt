@@ -84,7 +84,7 @@ export default function GeneratedForm() {
     onError: () => toast.error('Error submitting form'),
   });
 
-  useTitle(data?.name || 'EarnKart');
+  useTitle(data?.name || 'Lead Tracker');
 
   const form = useForm();
 
