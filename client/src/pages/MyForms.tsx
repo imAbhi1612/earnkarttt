@@ -29,7 +29,7 @@ interface FormsResponseType extends PaginatedResponseType {
 }
 
 export default function MyForms() {
-  useTitle('My Forms | Form Builder');
+  useTitle('My Forms | Lead Tracker');
   const [searchParams] = useSearchParams();
   const axiosPrivate = useAxiosPrivate();
   const queryClient = useQueryClient();
