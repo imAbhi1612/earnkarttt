@@ -152,7 +152,7 @@ export default function FormElementCard({
                 checked={field?.value}
                 onCheckedChange={field?.onChange}
               />
-            ) : null} : type === 'rich-text' ? (
+            ) : type === 'rich-text' ? (
           <RichTextEditor field={field} />
         ) : ['checklist', 'multi-choice', 'dropdown', 'combobox'].includes(
             type,
