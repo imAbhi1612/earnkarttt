@@ -45,31 +45,30 @@ export default function FormElementCard({
 
   return (
     <article
-      className={`relative flex gap-2 rounded-md bg-white py-1 ${
+      className={`relative flex gap-2 rounded-md bg-white py-3 ${
         isView ? 'px-5' : 'pl-2 pr-4'
       }`}
     >
       <div
         className={`flex-grow space-y-2 ${
-          ['heading', 'description', 'checkbox', 'switch'].includes(type)
+          ['heading', 'description'].includes(type)
             ? ''
             : 'pb-2'
         }`}
       >
         <div className="flex items-center gap-8">
           <div className="flex w-full items-center gap-5">
-{/*             {type === 'switch' ? (
+            {type === 'switch' ? (
               <Switch
                 checked={field?.value}
                 onCheckedChange={field?.onChange}
-                
               />
             ) : type === 'checkbox' ? (
               <Checkbox
                 checked={field?.value}
                 onCheckedChange={field?.onChange}
               />
-            ) : null} */}
+            ) : null}
             <BubbleMenuEditor
               placeholder={
                 ['heading', 'description'].includes(type)
@@ -85,7 +84,7 @@ export default function FormElementCard({
           </div>
           {isView ? null : (
             <div className="flex items-center">
-              {['heading', 'description', 'switch', 'checkbox'].includes(
+              {['heading', 'description'].includes(
                 type,
               ) ? null : (
                 <div className="flex items-center gap-2">
@@ -141,19 +140,7 @@ export default function FormElementCard({
             value={field?.value ?? ''}
             onChange={field?.onChange}
           />
-        )  : type === 'switch' ? (
-              <Switch
-                checked={field?.value}
-                onCheckedChange={field?.onChange}
-                required={field ? required : false}
-              />
-            ) : type === 'checkbox' ? (
-              <Checkbox
-                checked={field?.value}
-                onCheckedChange={field?.onChange}
-                required={field ? required : false}
-              />
-            ) : type === 'rich-text' ? (
+        ) : type === 'rich-text' ? (
           <RichTextEditor field={field} />
         ) : ['checklist', 'multi-choice', 'dropdown', 'combobox'].includes(
             type,
@@ -165,7 +152,6 @@ export default function FormElementCard({
               <li key={value} className="flex items-center gap-3">
                 <Checkbox
                   id={value}
-                  required={field ? required : false}
                   checked={field?.value?.includes(label) ?? false}
                   onCheckedChange={checked => {
                     if (checked) field?.onChange([...field.value, label]);
