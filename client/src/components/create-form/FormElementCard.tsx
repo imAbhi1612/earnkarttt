@@ -58,7 +58,7 @@ export default function FormElementCard({
       >
         <div className="flex items-center gap-8">
           <div className="flex w-full items-center gap-5">
-            {type === 'switch' ? (
+{/*             {type === 'switch' ? (
               <Switch
                 checked={field?.value}
                 onCheckedChange={field?.onChange}
@@ -69,7 +69,7 @@ export default function FormElementCard({
                 checked={field?.value}
                 onCheckedChange={field?.onChange}
               />
-            ) : null}
+            ) : null} */}
             <BubbleMenuEditor
               placeholder={
                 ['heading', 'description'].includes(type)
@@ -141,7 +141,18 @@ export default function FormElementCard({
             value={field?.value ?? ''}
             onChange={field?.onChange}
           />
-        ) : type === 'rich-text' ? (
+        )  : type === 'switch' ? (
+              <Switch
+                checked={field?.value}
+                onCheckedChange={field?.onChange}
+                
+              />
+            ) : type === 'checkbox' ? (
+              <Checkbox
+                checked={field?.value}
+                onCheckedChange={field?.onChange}
+              />
+            ) : null} : type === 'rich-text' ? (
           <RichTextEditor field={field} />
         ) : ['checklist', 'multi-choice', 'dropdown', 'combobox'].includes(
             type,
