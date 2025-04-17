@@ -22,7 +22,7 @@ export default function Settings() {
   const axiosPrivate = useAxiosPrivate();
   const logout = useLogout();
 
-  useTitle('Settings | Form Builder');
+  useTitle('Settings | Lead Tracker');
 
   const { mutate, isPending } = useMutation({
     mutationFn: () => axiosPrivate.delete('/user/delete-account'),
