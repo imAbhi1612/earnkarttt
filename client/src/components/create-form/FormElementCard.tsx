@@ -145,12 +145,13 @@ export default function FormElementCard({
               <Switch
                 checked={field?.value}
                 onCheckedChange={field?.onChange}
-                
+                required={field ? required : false}
               />
             ) : type === 'checkbox' ? (
               <Checkbox
                 checked={field?.value}
                 onCheckedChange={field?.onChange}
+                required={field ? required : false}
               />
             ) : type === 'rich-text' ? (
           <RichTextEditor field={field} />
