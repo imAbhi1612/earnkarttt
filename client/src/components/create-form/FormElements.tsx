@@ -35,6 +35,8 @@ function determineType(text: string) {
       return 'name';
     case 'Number':
       return 'number';
+    case 'Email Id':
+      return 'name';
     case 'Vendor Name':
       return 'name';
     case 'Multi-line':
@@ -88,6 +90,10 @@ const elementGroups = [
       {
         text: 'Number',
         Icon: NumberSvg,
+      },
+      {
+        text: 'Email Id',
+        Icon: TypeIcon,
       },
       {
         text: 'Vendor Name',
