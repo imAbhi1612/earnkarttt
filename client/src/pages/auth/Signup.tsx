@@ -32,7 +32,7 @@ export default function Signup() {
   const navigate = useNavigate();
   const setCookie = useCookies(['userDetails'])[1];
   const { setAuth } = useAuth();
-  useTitle('Sign Up Free | Form Builder');
+  useTitle('Sign Up Free | Lead Tracker');
 
   const {
     register,
