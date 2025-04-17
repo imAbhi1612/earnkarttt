@@ -62,6 +62,7 @@ export default function FormElementCard({
               <Switch
                 checked={field?.value}
                 onCheckedChange={field?.onChange}
+                required={field ? required : false}
               />
             ) : type === 'checkbox' ? (
               <Checkbox
@@ -152,6 +153,7 @@ export default function FormElementCard({
               <li key={value} className="flex items-center gap-3">
                 <Checkbox
                   id={value}
+                  required={field ? required : false}
                   checked={field?.value?.includes(label) ?? false}
                   onCheckedChange={checked => {
                     if (checked) field?.onChange([...field.value, label]);
